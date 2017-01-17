@@ -1,0 +1,17 @@
+{
+  "name": "radio-button-react-native",
+  "version": "1.0.5",
+  "description": "Simple Radio Button for React Native.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "radio",
+    "button"
+  ],
+  "author": "Abhay Gupta",
+  "license": "ISC"
+}
