@@ -11,7 +11,7 @@ export default class RadioButton extends Component{
     
     render(){
     return(
-            <TouchableWithoutFeedback onPress={() => this.props.onPress(this.props.value)}>
+            <TouchableWithoutFeedback disabled={this.props.disabled} onPress={() => this.props.onPress(this.props.value)}>
         <View style={{ flexDirection: 'row' }}>
             <View style={[{
             height: this.props.outerCircleSize || 24,
