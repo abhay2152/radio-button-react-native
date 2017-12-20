@@ -28,20 +28,19 @@ export default class RadioButton extends Component {
   }
 
   render() {
+    const { accessibilityLabel, onPress, value, currentValue, children } = this.props;
     return (
       <TouchableWithoutFeedback
-        accessibilityLabel={this.props.accessibilityLabel}
-        onPress={() => this.props.onPress(this.props.value)}
+        accessibilityLabel={accessibilityLabel}
+        onPress={() => onPress(value)}
       >
         <View style={styles.circleContainer}>
-          <View style={[styles.defaultOuterCircleStyle, this.getOuterCircleStyle]}>
-            { this.props.value === this.props.currentValue &&
-              <View
-                style={this.getInnerCircleStyle}
-              />
+          <View style={[styles.defaultOuterCircleStyle, this.getOuterCircleStyle()]}>
+            { value === currentValue &&
+              <View style={this.getInnerCircleStyle()} />
             }
           </View>
-          {this.props.children}
+          {children}
         </View>
       </TouchableWithoutFeedback>
     );
@@ -58,7 +57,7 @@ RadioButton.propTypes = {
   outerCircleColor: PropTypes.string,
   innerCircleColor: PropTypes.string,
   children: PropTypes.any,
-  value: PropTypes.any,
+  value: PropTypes.any.isRequired,
   currentValue: PropTypes.any,
 };
 
