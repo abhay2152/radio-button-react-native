@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import styles from './styles';
 
+
 export default class RadioButton extends Component {
 
   getOuterCircleStyle() {
@@ -33,15 +34,10 @@ export default class RadioButton extends Component {
         onPress={() => this.props.onPress(this.props.value)}
       >
         <View style={styles.circleContainer}>
-          <View style={this.getOuterCircleStyle()}>
+          <View style={[styles.defaultOuterCircleStyle, this.getOuterCircleStyle]}>
             { this.props.value === this.props.currentValue &&
               <View
-                style={{
-                  height: this.props.innerCircleSize,
-                  width: this.props.innerCircleSize,
-                  borderRadius: this.props.innerCircleSize / 2,
-                  backgroundColor: this.props.innerCircleColor,
-                }}
+                style={this.getInnerCircleStyle}
               />
             }
           </View>
