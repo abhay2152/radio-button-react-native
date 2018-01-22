@@ -49,7 +49,7 @@ Basic
 ---
 
 ```js
-<RadioForm
+<RadioButton
 currentValue={this.state.value}
  value={0}
  onPress={this.handleOnPress.bind(this)}
