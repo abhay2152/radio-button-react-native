@@ -31,6 +31,7 @@ export default class RadioButton extends Component {
     const { accessibilityLabel, onPress, value, currentValue, children } = this.props;
     return (
       <TouchableWithoutFeedback
+        disabled={this.props.disabled}
         accessibilityLabel={accessibilityLabel}
         onPress={() => onPress(value)}
       >
