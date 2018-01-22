@@ -1,46 +1,74 @@
-import React,{Component} from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TouchableWithoutFeedback
-} from 'react-native';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { View, TouchableWithoutFeedback } from 'react-native';
+import styles from './styles';
+
 
 export default class RadioButton extends Component {
-    
-    render(){
-        return(
-            <View style={this.props.wrapperStyle}>
-              <TouchableWithoutFeedback onPress={() => this.props.onPress(this.props.value)}>
-                <View style={{ flexDirection: 'row' }}>
-                    <View style={[{
-                    height: this.props.outerCircleSize || 24,
-                    width: this.props.outerCircleSize || 24,
-                    borderRadius: this.props.outerCircleSize/2 || 12,
-                    borderWidth: this.props.outerCircleWidth || 2,
-                    borderColor: this.props.outerCircleColor || '#9eacb4',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    }]}>
-                    {
-                    this.props.value===this.props.currentValue ?
-                    <View style={{
-                      height: this.props.innerCircleSize || 12,
-                      width: this.props.innerCircleSize || 12,
-                      borderRadius: this.props.innerCircleSize/2 || 6,
-                      backgroundColor: this.props.innerCircleColor || '#ff6624',
-                    }}/>
-                    : null
-                    }
-                    </View>
-                       {this.props.children}
-                    </View>
-               </TouchableWithoutFeedback>
-            </View>
-        );
-    }
+
+  getOuterCircleStyle() {
+    const { outerCircleSize, outerCircleWidth, outerCircleColor } = this.props;
+    return {
+      height: outerCircleSize,
+      width: outerCircleSize,
+      borderRadius: outerCircleSize / 2,
+      borderWidth: outerCircleWidth,
+      borderColor: outerCircleColor,
+    };
+  }
+
+  getInnerCircleStyle() {
+    const { innerCircleSize, innerCircleColor } = this.props;
+    return {
+      height: innerCircleSize,
+      width: innerCircleSize,
+      borderRadius: innerCircleSize / 2,
+      backgroundColor: innerCircleColor,
+    };
+  }
+
+  render() {
+    const { accessibilityLabel, onPress, value, currentValue, children } = this.props;
+    return (
+      <View style={this.props.wrapperStyle}>
+      <TouchableWithoutFeedback
+        disabled={this.props.disabled}
+        accessibilityLabel={accessibilityLabel}
+        onPress={() => onPress(value)}
+      >
+        <View style={styles.circleContainer}>
+          <View style={[styles.defaultOuterCircleStyle, this.getOuterCircleStyle()]}>
+            { value === currentValue &&
+              <View style={this.getInnerCircleStyle()} />
+            }
+          </View>
+          {children}
+        </View>
+      </TouchableWithoutFeedback>
+      </View>
+    );
+  }
 }
+
+RadioButton.propTypes = {
+  accessibilityLabel: PropTypes.string,
+  onPress: PropTypes.func,
+  outerCircleSize: PropTypes.number,
+  outerCircleWidth: PropTypes.number,
+  innerCircleSize: PropTypes.number,
+  outerCircleColor: PropTypes.string,
+  innerCircleColor: PropTypes.string,
+  children: PropTypes.any,
+  value: PropTypes.any.isRequired,
+  currentValue: PropTypes.any,
+};
+
 RadioButton.defaultProps = {
-    wrapperStyle: {}
-}
+  wrapperStyle: {},
+  onPress: () => {},
+  outerCircleSize: 24,
+  outerCircleWidth: 2,
+  innerCircleSize: 12,
+  outerCircleColor: '#9eacb4',
+  innerCircleColor: '#ff6624',
+};
