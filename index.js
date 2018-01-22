@@ -30,6 +30,7 @@ export default class RadioButton extends Component {
   render() {
     const { accessibilityLabel, onPress, value, currentValue, children } = this.props;
     return (
+      <View style={this.props.wrapperStyle}>
       <TouchableWithoutFeedback
         disabled={this.props.disabled}
         accessibilityLabel={accessibilityLabel}
@@ -44,9 +45,9 @@ export default class RadioButton extends Component {
           {children}
         </View>
       </TouchableWithoutFeedback>
+      </View>
     );
   }
-
 }
 
 RadioButton.propTypes = {
@@ -63,6 +64,7 @@ RadioButton.propTypes = {
 };
 
 RadioButton.defaultProps = {
+  wrapperStyle: {},
   onPress: () => {},
   outerCircleSize: 24,
   outerCircleWidth: 2,
